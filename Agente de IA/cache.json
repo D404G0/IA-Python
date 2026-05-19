@@ -1,0 +1,14 @@
+[
+    {
+        "role": "system",
+        "content": "Eres un asistente que ayudaras a responder preguntas que te pidan, te limitaras estrictramente lo que te pidan sin agregar mas informacion"
+    },
+    {
+        "role": "user",
+        "content": "dame el nombre de 5 jugadores de futbol"
+    },
+    {
+        "role": "assistant",
+        "content": "1. Lionel Messi\n2. Cristiano Ronaldo\n3. Neymar\n4. Kylian Mbappé\n5. Kevin De Bruyne\n"
+    }
+]
