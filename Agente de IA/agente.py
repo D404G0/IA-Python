@@ -1,8 +1,10 @@
+#---------------------Importar libreria---------------------#
 import requests
-import json
+import os
 from requests import Response
 from datos import url, token
 
+#---------------------Conexion con nvidia---------------------#
 invoke_url = url
 stream = False
 
@@ -10,7 +12,7 @@ headers = {
     "Authorization": "Bearer " + token,
 }
 
-# 1. Esta es tu lista viva en la memoria RAM
+#---------------------Memoria de IA---------------------#
 messages = [
     {
         "role": "system", 
@@ -18,8 +20,26 @@ messages = [
     }
 ]
 
+#---------------------Funcion de herramientas---------------------#
+def list_files(directory = "."):
+    print("⚙️ Herramienta llamada: list_files")
+
+    try:
+        files = os.listdir(directory)
+        return{"files": files}
+    
+    except Exception as e:
+        return ("error": str(e))
+
+tools = [
+    {
+        
+    }
+]
+#---------------------Respuesta de modelo---------------------#
 while True:
 
+    #-------------Validacion de input-------------#
     user_input = input("Tu: ").strip()
 
     if not user_input:
@@ -29,8 +49,10 @@ while True:
         print("Chaoooo")
         break
 
+    #-------------Agregar respuesta en memoria-------------#
     messages.append({"role": "user", "content": user_input})
 
+    #-------------Conexion y respuesta de modelo de ia-------------#
     payload = {
         "model": "google/gemma-3n-e4b-it",
         "messages": messages  
@@ -47,8 +69,6 @@ while True:
         print(f'IA: \n {texto_ia}')
         print("-" * 30) 
 
-        with open("cache.json", "w", encoding = "utf-8") as archivo:
-            json.dump(messages, archivo, indent = 4, ensure_ascii = False)
 
     else:
         print("Hubo un error en la petición. Respuesta del servidor:")
